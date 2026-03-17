@@ -1,11 +1,11 @@
 import pygame
 import random
 
-pygame.init()
+pygame.init() #Pokreće pygame
 
-WIDTH, HEIGHT = 900, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Fishing Game")
+WIDTH, HEIGHT = 900, 600 #Dimenzije prozora
+screen = pygame.display.set_mode((WIDTH, HEIGHT)) #Kreiranje prozora 
+pygame.display.set_caption("Pecanje") #Imenovanje prozora
 
 clock = pygame.time.Clock()
 
