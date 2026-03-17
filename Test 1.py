@@ -7,8 +7,8 @@ WIDTH, HEIGHT = 900, 600 #Dimenzije prozora
 screen = pygame.display.set_mode((WIDTH, HEIGHT)) #Kreiranje prozora 
 pygame.display.set_caption("Pecanje") #Imenovanje prozora
 
-clock = pygame.time.Clock()
-
+clock = pygame.time.Clock() #Stvara "objekt" koji pomaže u praćenju vremena
+#Imenovanje boja (za lakše korištenje kasnije)
 BLUE = (70,140,255)
 DARK_BLUE = (20,70,200)
 WHITE = (255,255,255)
