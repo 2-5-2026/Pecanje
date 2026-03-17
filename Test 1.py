@@ -17,12 +17,12 @@ RED = (200,60,60)
 BLACK = (0,0,0)
 FISH_COLOR = (230,140,60)
 
-font = pygame.font.SysFont(None, 36)
+font = pygame.font.SysFont(None, 36) #Font za tekst
 
 score = 0
 highscore = 0
 
-GAME_TIME = 60
+GAME_TIME = 60 #Trajanje igre
 start_time = pygame.time.get_ticks()
 time_left = GAME_TIME
 
