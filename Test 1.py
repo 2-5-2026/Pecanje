@@ -207,8 +207,9 @@ while running:
 
         pygame.draw.rect(screen,RED,(square_x,bar_y,20,30))
 
-        text = font.render("SPACE U ZELENOJ ZONI!",True,WHITE)
-        screen.blit(text,(350,bar_y-40))
+        text = font.render("KLIKNI SPACE KADA JE CRVENI PRAVOKUTNIK U ZELENOJ ZONI!", True, WHITE)
+        text_rect = text.get_rect(center=(bar_x + bar_width // 2, bar_y - 20))
+        screen.blit(text, text_rect)
 
 
     elif game_state == "gameover":
