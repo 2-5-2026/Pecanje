@@ -19,23 +19,23 @@ FISH_COLOR = (230,140,60)
 
 font = pygame.font.SysFont(None, 36) #Font za tekst
 
-score = 0
+score = 0 
 highscore = 0
 
 GAME_TIME = 60 #Trajanje igre
-start_time = pygame.time.get_ticks()
+start_time = pygame.time.get_ticks() #Koliko je milisekundi prošlo od pokretanja pygamea
 time_left = GAME_TIME
 
-hook_x = WIDTH//2
-hook_y = 80
-hook_speed = 6
+hook_x = WIDTH//2 #Početna pozicija udice
+hook_y = 80 #Početna pozicija udice
+hook_speed = 6 #Brzina micanja udice
 
-game_state = "fishing"
+game_state = "fishing" #1. faza igre - pecanje ribe
 
 current_fish = None
 
 
-class Fish:
+class Fish: #Definira kako će riba izgledati, brzinu i poziciju
 
     def __init__(self):
 
@@ -56,7 +56,7 @@ class Fish:
 
     def draw(self):
 
-        pygame.draw.ellipse(screen,FISH_COLOR,(self.x,self.y,self.width,self.height))
+        pygame.draw.ellipse(screen,FISH_COLOR,(self.x,self.y,self.width,self.height)) #Tijelo ribe
 
         if self.speed > 0:
 
@@ -78,17 +78,17 @@ class Fish:
 
             eye_x = self.x + 10
 
-        pygame.draw.polygon(screen,FISH_COLOR,points)
-
-        pygame.draw.circle(screen,WHITE,(eye_x,self.y+10),4)
-        pygame.draw.circle(screen,BLACK,(eye_x,self.y+10),2)
-
-
-fish_list = [Fish() for _ in range(6)]
+        pygame.draw.polygon(screen,FISH_COLOR,points) #Rep ribe
+        
+        pygame.draw.circle(screen,WHITE,(eye_x,self.y+10),4) #Vanjski dio oka
+        pygame.draw.circle(screen,BLACK,(eye_x,self.y+10),2) #Unutarnji dio oka
 
 
-# MINIGAME
+fish_list = [Fish() for _ in range(6)] #Broj riba
 
+
+# 2.faza igre - bar nakon što je riba upecana
+# Pozicija,veličina i izgled bara
 bar_x = 150
 bar_width = 600
 bar_y = HEIGHT//2
