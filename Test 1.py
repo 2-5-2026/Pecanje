@@ -168,18 +168,17 @@ while running:
                 game_state = "fishing" #Povratak na pecanje
 
 
-    keys = pygame.key.get_pressed()
+    keys = pygame.key.get_pressed() #Provjerava koje tipke "drži" korisnik
 
     if game_state == "fishing":
-
-        if keys[pygame.K_UP]:
+        #Spuštanje/dizanje udice ako korisnik stisne stelicu prema dolje/gore na tipkovnici
             hook_y -= hook_speed
 
         if keys[pygame.K_DOWN]:
             hook_y += hook_speed
 
-        hook_y = max(50, min(HEIGHT, hook_y))
-
+        hook_y = max(50, min(HEIGHT, hook_y)) #Ograničenje da udica ne izađe iz programa
+        #Crtanje udice
         pygame.draw.line(screen,WHITE,(hook_x,0),(hook_x,hook_y),2)
         pygame.draw.circle(screen,BLACK,(hook_x,hook_y),7)
 
@@ -187,9 +186,9 @@ while running:
 
             fish.move()
             fish.draw()
-
-            if abs(hook_x - fish.x) < 40 and abs(hook_y - fish.y) < 20:
-
+            #Provjera dodira između ribe i udice
+            if abs(hook_x - fish.x) < 40 and abs(hook_y - fish.y) < 20: #Pokreće minigame
+        
                 current_fish = fish
                 start_minigame()
                 game_state = "minigame"
@@ -197,24 +196,24 @@ while running:
 
     elif game_state == "minigame":
 
-        pygame.draw.rect(screen,WHITE,(bar_x,bar_y,bar_width,30))
-        pygame.draw.rect(screen,GREEN,(green_zone,bar_y,green_width,30))
+        pygame.draw.rect(screen,WHITE,(bar_x,bar_y,bar_width,30)) #Crtanje bijelog bara
+        pygame.draw.rect(screen,GREEN,(green_zone,bar_y,green_width,30)) #Crtanje zelene zone
 
-        square_x += square_speed
+        square_x += square_speed #Micanje crvenog pravokutnika
 
         if square_x < bar_x or square_x > bar_x+bar_width-20:
-            square_speed *= -1
+            square_speed *= -1 #Promjena smjera crvenog pravokutnika kada dođe do kraja bara
 
-        pygame.draw.rect(screen,RED,(square_x,bar_y,20,30))
-
-        text = font.render("KLIKNI SPACE KADA JE CRVENI PRAVOKUTNIK U ZELENOJ ZONI!", True, WHITE)
-        text_rect = text.get_rect(center=(bar_x + bar_width // 2, bar_y - 20))
-        screen.blit(text, text_rect)
+        pygame.draw.rect(screen,RED,(square_x,bar_y,20,30)) #Crtanje crvenog pravokutnika
+        
+        text = font.render("KLIKNI SPACE KADA JE CRVENI PRAVOKUTNIK U ZELENOJ ZONI!", True, WHITE) #Pretvara tekst u "sliku"
+        text_rect = text.get_rect(center=(bar_x + bar_width // 2, bar_y - 20)) #Pozicioniranje teksta
+        screen.blit(text, text_rect) #Prikazuje sliku na ekranu (ali još nije vidljivo korisniku)
 
 
     elif game_state == "gameover":
-
-        text = font.render("VRIJEME JE ISTEKLO!", True, WHITE)
+        #Ispis poruka
+        text = font.render("VRIJEME JE ISTEKLO!", True, WHITE) 
         screen.blit(text,(WIDTH//2-150,HEIGHT//2-40))
 
         text2 = font.render(f"Score: {score}", True, WHITE)
@@ -226,7 +225,7 @@ while running:
         text4 = font.render("PRITISNI R ZA RESTART", True, WHITE)
         screen.blit(text4,(WIDTH//2-160,HEIGHT//2+80))
 
-
+    #Stalni tekst : score, highscore, vrijeme
     score_text = font.render(f"Score: {score}",True,WHITE)
     screen.blit(score_text,(20,20))
 
@@ -236,8 +235,7 @@ while running:
     time_text = font.render(f"Time: {time_left}", True, WHITE)
     screen.blit(time_text,(WIDTH-150,20))
 
-
-    pygame.display.update()
-    clock.tick(60)
-
+    pygame.display.update() #Pojavljivanje svega na ekranu
+    clock.tick(60) #Ograničava igru na 60 FPS
+#Završetak igre
 pygame.quit()
