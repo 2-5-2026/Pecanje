@@ -1,3 +1,4 @@
+
 import pygame
 import random
 
@@ -172,6 +173,7 @@ while running:
 
     if game_state == "fishing":
         #Spuštanje/dizanje udice ako korisnik stisne stelicu prema dolje/gore na tipkovnici
+        if keys[pygame.K_UP]:
             hook_y -= hook_speed
 
         if keys[pygame.K_DOWN]:
