@@ -87,85 +87,85 @@ class Fish: #Definira kako će riba izgledati, brzinu i poziciju
 fish_list = [Fish() for _ in range(6)] #Broj riba
 
 
-# 2.faza igre - bar nakon što je riba upecana
-# Pozicija,veličina i izgled bara
-bar_x = 150
-bar_width = 600
-bar_y = HEIGHT//2
+# 2.faza igre - mini game nakon što je riba upecana
+# Pozicija,veličina i izgled bara za 1.upecanu ribu
+bar_x = 150 #Pozicija bara
+bar_width = 600 #Širina bara
+bar_y = HEIGHT//2 #Pozicija bara
 
-square_x = bar_x
-square_speed = 7
+square_x = bar_x #Početna pozicija crvenog pravokutnika
+square_speed = 7 #Brzina crvenog pravokutnika
 
-green_width = 120
-green_zone = random.randint(bar_x, bar_x + bar_width - green_width)
-
-
-def start_minigame():
-
-    global square_x, square_speed, green_zone
-
-    square_x = bar_x
-    square_speed = random.choice([6,7,8])
-
-    green_zone = random.randint(bar_x, bar_x + bar_width - green_width)
+green_width = 120 #Širina zelene zone
+green_zone = random.randint(bar_x, bar_x + bar_width - green_width) #Nasumična pozicija zelene zone
 
 
+def start_minigame(): #Početak mini gamea, za 2.upecanu ribu i sve nakon nje
+
+    global square_x, square_speed, green_zone #Omogućuje korištenje i mijenjanje varijabli izvan funkcije 
+
+    square_x = bar_x #Početna pozicija crvenog pravokutnika
+    square_speed = random.choice([6,7,8]) #Brzina crvenog pravokutnika
+
+    green_zone = random.randint(bar_x, bar_x + bar_width - green_width) #Nasumična pozicija zelene zone
+
+#Omogućuje trajanje igre dok je istekne vrijeme
 running = True
 
 while running:
 
-    screen.fill(BLUE)
-    pygame.draw.rect(screen,DARK_BLUE,(0,250,WIDTH,HEIGHT))
+    screen.fill(BLUE) #Crtanje neba
+    pygame.draw.rect(screen,DARK_BLUE,(0,250,WIDTH,HEIGHT)) #Crtanje mora
 
-    # TIMER
+    # Štoperica
 
     if game_state != "gameover":
 
-        elapsed = (pygame.time.get_ticks() - start_time) / 1000
-        time_left = max(0, GAME_TIME - int(elapsed))
-
+        elapsed = (pygame.time.get_ticks() - start_time) / 1000 #Koliko je vremena prošlo
+        time_left = max(0, GAME_TIME - int(elapsed)) #Preostalo vrijeme
+        #Kraj igre kad istekne vrijeme
         if time_left <= 0:
             game_state = "gameover"
-
+            #Promjena highscora ako je potrebno
             if score > highscore:
                 highscore = score
 
 
-    for event in pygame.event.get():
-
+    for event in pygame.event.get(): #Event - akcije korisnika npr. klik miša i pritisak tipke na tipkovnici, izvršava sve evente
+        #Gasi sve pygame module i zatvara igru
         if event.type == pygame.QUIT:
             running = False
 
-
+        
         if game_state == "minigame":
-
+            #Dektektira pritisak spacea/razmaka
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-
+                #Provjerava je li pravokutnik u zelenoj zoni
                 if green_zone <= square_x <= green_zone+green_width:
 
-                    score += 1
+                    score += 1 #Povećavanje scora ako da
 
-                    if current_fish in fish_list:
-                        fish_list.remove(current_fish)
+                    if current_fish in fish_list: 
+                        fish_list.remove(current_fish) #Izbacuje ulovljenu ribu
 
-                    fish_list.append(Fish())
+                    fish_list.append(Fish()) #Dodaje novu ribu
 
-                game_state = "fishing"
+                game_state = "fishing" #Povratak na pecanje
 
 
         if game_state == "gameover":
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_r: #Dektektira pritisak tipke R za ponovno pokretanje igre
+                #Reset varijabli
                 score = 0
                 hook_y = 80
-                fish_list.clear()
+                fish_list.clear() #Briše sve ribe
 
                 for i in range(6):
-                    fish_list.append(Fish())
+                    fish_list.append(Fish()) #Dodavanje riba
 
-                start_time = pygame.time.get_ticks()
-                game_state = "fishing"
+                start_time = pygame.time.get_ticks() #Resetiranje vremena
+                game_state = "fishing" #Povratak na pecanje
 
 
     keys = pygame.key.get_pressed()
