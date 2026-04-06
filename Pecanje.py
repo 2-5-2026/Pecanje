@@ -215,17 +215,22 @@ while running:
 
     elif game_state == "gameover":
         #Ispis poruka
-        text = font.render("VRIJEME JE ISTEKLO!", True, WHITE) 
-        screen.blit(text,(WIDTH//2-150,HEIGHT//2-40))
+        spacing=40
+        text = font.render("VRIJEME JE ISTEKLO!", True, WHITE)
+        text_rect = text.get_rect(center=(WIDTH//2, HEIGHT//2 - spacing))
+        screen.blit(text, text_rect)
 
         text2 = font.render(f"Score: {score}", True, WHITE)
-        screen.blit(text2,(WIDTH//2-70,HEIGHT//2))
+        text2_rect = text2.get_rect(center=(WIDTH//2, HEIGHT//2))
+        screen.blit(text2, text2_rect)
 
         text3 = font.render(f"Highscore: {highscore}", True, WHITE)
-        screen.blit(text3,(WIDTH//2-100,HEIGHT//2+40))
+        text3_rect = text3.get_rect(center=(WIDTH//2, HEIGHT//2 + spacing))
+        screen.blit(text3, text3_rect)
 
         text4 = font.render("PRITISNI R ZA PONOVNO POKRETANJE", True, WHITE)
-        screen.blit(text4,(WIDTH//2-160,HEIGHT//2+80))
+        text4_rect = text4.get_rect(center=(WIDTH//2, HEIGHT//2 + 2*spacing))
+        screen.blit(text4, text4_rect)
 
     #Stalni tekst : score, highscore, vrijeme
     score_text = font.render(f"Score: {score}",True,WHITE)
