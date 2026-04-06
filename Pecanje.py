@@ -224,7 +224,7 @@ while running:
         text3 = font.render(f"Highscore: {highscore}", True, WHITE)
         screen.blit(text3,(WIDTH//2-100,HEIGHT//2+40))
 
-        text4 = font.render("PRITISNI R ZA RESTART", True, WHITE)
+        text4 = font.render("PRITISNI R ZA PONOVNO POKRETANJE", True, WHITE)
         screen.blit(text4,(WIDTH//2-160,HEIGHT//2+80))
 
     #Stalni tekst : score, highscore, vrijeme
@@ -234,7 +234,7 @@ while running:
     highscore_text = font.render(f"Highscore: {highscore}",True,WHITE)
     screen.blit(highscore_text,(20,60))
 
-    time_text = font.render(f"Time: {time_left}", True, WHITE)
+    time_text = font.render(f"Vrijeme: {time_left}", True, WHITE)
     screen.blit(time_text,(WIDTH-150,20))
 
     pygame.display.update() #Pojavljivanje svega na ekranu
